@@ -8,14 +8,18 @@ import apap.ti1.sivaksin.service.DokterService;
 import apap.ti1.sivaksin.service.VaksinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import apap.ti1.sivaksin.service.FaskesService;
 import apap.ti1.sivaksin.service.PasienService;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class PasienController {
@@ -140,9 +144,7 @@ public class PasienController {
         } else {
             ListPasien = new ArrayList<PasienModel>(List.of(pasien));
         }
-//        faskes.setListPasien(ListPasien);
-        pasienService.addPasien(pasien);
-        faskesService.addFaskes(faskes);
+        faskes.setListPasien(ListPasien);
         model.addAttribute("idFaskes", faskes.getIdFaskes());
         model.addAttribute("listDokter", dokterService.getListDokter());
         model.addAttribute("listPasien", pasienService.getPasienList());
@@ -173,5 +175,36 @@ public class PasienController {
         model.addAttribute("jenisVaksin", vaksin.getJenisVaksin());
         model.addAttribute("idVaksin", vaksin.getIdVaksin());
         return "form-cari-vaksin";
+    }
+
+    @GetMapping("/cari/pasien")
+    public String cariPasien(Model model) {
+        List<VaksinModel> listVaksin = vaksinService.getListVaksin();
+        List<FaskesModel> listFaskes = faskesService.getListFaskes();
+        model.addAttribute("listVaksin", listVaksin);
+        model.addAttribute("listFaskes", listFaskes);
+        model.addAttribute("pasien", new PasienModel());
+        return "form-cari-pasien";
+    }
+
+    @GetMapping("")
+    public static String batchIdGenerator(int jenisKelamin, String namaPasien, DateTimeFormat tanggalLahir){
+        StringBuilder ret = new StringBuilder();
+        ret.append(jenisKelamin);
+        ret.append(namaPasien.substring(namaPasien.length()-1).toUpperCase());
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String strDate = dateFormat.format(tanggalLahir);
+        ret.append(strDate.substring(8,10));
+        ret.append(strDate.substring(5,7));
+        ret.append(Integer.parseInt(strDate.substring(0,4)) / 10);
+
+        Random r = new Random();
+        char c1 = (char) (r.nextInt(26) + 'A');
+        char c2 = (char) (r.nextInt(26) + 'A');
+        ret.append(c1);
+        ret.append(c2);
+
+        return ret.toString();
     }
 }

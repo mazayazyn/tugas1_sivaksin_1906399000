@@ -59,7 +59,7 @@ public class FaskesModel implements Serializable {
     private VaksinModel vaksin;
 
     //Relasi dengan PasienModel
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "faskes_pasien",
             joinColumns = @JoinColumn(name = "id_faskes"),

@@ -3,15 +3,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.ejb.Local;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -68,14 +64,6 @@ public class PasienModel implements Serializable{
     //Relasi dengan DokterPasienModel
     @OneToMany(mappedBy ="pasien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DokterPasienModel> listDokterPasien;
-
-//    public List<FaskesModel> getFaskes() {
-//        return faskes;
-//    }
-//
-//    public void setListFaskes(faskes) {
-//        this.faskes = faskes;
-//    }
 }
 
 

@@ -17,7 +17,8 @@
             <div class="justify-content-center">
                 <h2>Tambah Pasien Faskes</h2>
                 <br>
-                <form th:action="@{/faskes/{id}/tambah/pasien (id=${faskes.idFaskes})}" th:object="${pasien}" method="POST">
+                <form th:object="${pasien}" method="POST">
+                <form>
                     Pasien <br>
                     <select name="pasien" class="form-control">
                         <option

@@ -37,14 +37,13 @@
       <li th:classappend="${#request.requestURI.contains('/pasien') ? 'active':''}" class="font-weight-bold">
         <a class="nav-link" href="/pasien">Pasien</a>
       </li>
-      <li th:classappend="${#request.requestURI.contains('/cari') ? 'active':''}" class="font-weight-bold">
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" th:classappend="${#request.requestURI.contains('/cari') ? 'active':''}" style="font-weight: bold;">
         <a style=font-weight:bold; class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Cari
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/cari/faskes">Cari Faskes berdasarkan Vaksin</a>
-          <a class="dropdown-item" href="#">Cari Pasien Berdasarkan Jenis Vaksin dan Faskes</a>
+          <a class="dropdown-item" href="/cari/faskes">Cari Faskes Berdasarkan Vaksin</a>
+          <a class="dropdown-item" href="/cari/pasien">Cari Pasien Berdasarkan Jenis Vaksin dan Faskes</a>
         </div>
       </li>
       </li>

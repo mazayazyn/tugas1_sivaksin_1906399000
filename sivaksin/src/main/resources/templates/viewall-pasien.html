@@ -46,7 +46,7 @@
             <td th:if="${pasien.jenisKelamin == 1}" th:text="'Laki-laki'"></td>
             <td th:text="${#temporals.dayOfWeekNameShort(pasien.tanggalLahir)} + ', ' +
                             ${#temporals.day(pasien.tanggalLahir)} + ' ' + ${#temporals.monthName(pasien.tanggalLahir)} + ' ' +
-                            ${#temporals.year(pasien.tanggalLahir)} + ' ' + ${#temporals.format(pasien.tanggalLahir, 'HH:mm')}">
+                            ${#temporals.year(pasien.tanggalLahir)}">
             </td>
             <td th:text="${pasien.tempatLahir}"></td>
             <td th:text="${pasien.pekerjaan}"></td>

@@ -3,10 +3,16 @@ package apap.ti1.sivaksin.service;
 import apap.ti1.sivaksin.model.PasienModel;
 import apap.ti1.sivaksin.repository.PasienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -38,5 +44,4 @@ public class PasienServiceImpl implements PasienService {
     public List<PasienModel> getPasienList() {
         return pasienRepository.findAll();
     }
-
 }

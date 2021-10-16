@@ -62,7 +62,7 @@ public class FaskesController {
         FaskesModel faskesModel = faskesService.getFaskesByIdFaskes(idFaskes);
         model.addAttribute("faskes", faskesModel);
         model.addAttribute("sedangTutup", faskesService.getSedangTutup(faskesModel));
-        model.addAttribute("listPasien", faskesModel.getListPasien());
+        model.addAttribute("listPasien", pasienService.getPasienList());
         return "view-faskes";
     }
 
