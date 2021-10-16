@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <title>Cari Vaksin di Faskes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body style="font-family: Poppins;" >
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Daftar Faskes Berdasarkan Vaksin</h2>
+
+                <form th:action="@{/cari/faskes}" method="GET">
+                <br>
+                Jenis Vaksin <br>
+                <select required class="form-control" name="jenisVaksin">
+                    <option name="jenisVaksin" th:each="vaksin : ${listVaksin}" th:value="${vaksin.jenisVaksin}" th:text="${vaksin.jenisVaksin}">
+                    </option>
+                </select>
+                <br>
+                <td th:if="${jenisVaksin !=null}" th:text="'Jenis vaksin yang dipilih adalah ' + ${jenisVaksin}"></td>
+                <br>
+                <br>
+                <button class="btn btn-primary" type="submit" name=" ">Cari Faskes</button>
+                <br>
+                <br>
+                </form>
+
+                <table class = "table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Kuota</th>
+                        <th>Provinsi</th>
+                        <th>Kabupaten</th>
+                        <th>Jam Mulai</th>
+                        <th>Jam Selesai</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="faskes, iterationStatus : ${listFaskesResult}"
+                        th:style="${iterationStatus.even} ? 'font-weight: bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${faskes.namaFaskes}"></td>
+                        <td th:text="${faskes.kuota}"></td>
+                        <td th:text="${faskes.provinsi}"></td>
+                        <td th:text="${faskes.kabupaten}"></td>
+                        <td th:text="${faskes.jamMulai}"></td>
+                        <td th:text="${faskes.jamTutup}"></td>
+                    </tbody>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+<br><br><br><br>
+</html>
